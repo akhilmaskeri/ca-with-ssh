@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+  ca:
+    build: 
+      context: ./
+      dockerfile: ./ca.dockerfile
+    container_name: ca
+    hostname: ca
+    expose:
+      - "22"
+
+  server:
+    build: 
+      context: ./
+      dockerfile: ./server.dockerfile
+    container_name: server
+    hostname: server
+    expose:
+      - "22"
+
+
+  client-1:
+    build: 
+      context: ./
+      dockerfile: ./client.dockerfile
+    container_name: client-1
+    hostname: client-1
+    expose:
+      - "22"
+
+  client-2:
+    build: 
+      context: ./
+      dockerfile: ./client.dockerfile
+    container_name: client-2
+    hostname: client-2
+    volumes:
+      - "./keys/client-2:/root/.ssh/"
+    expose:
+      - "22"
